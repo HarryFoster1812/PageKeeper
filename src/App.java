@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.stage.Stage;
+import pages.SceneManager; 
 
 public class App extends Application {
     
@@ -7,7 +9,6 @@ public class App extends Application {
     }
 
     public void start(Stage stage){
-        stage.setTitle("PageKeeper");
-        stage.show();
+        SceneManager manager = new SceneManager(stage);
     }
 }
