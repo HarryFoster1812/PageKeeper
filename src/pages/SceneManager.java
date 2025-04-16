@@ -11,16 +11,20 @@ public class SceneManager {
     private Stage stage;
     private Scene scene;
 
-    public SceneManager(Stage stage){
-        File configFile = new File("../config/user.conf");
+    private NavBarView navbar;
+
+    public SceneManager(Stage stage) {
+
+        this.stage = stage;
+
+        File configFile = new File("./config/user.conf");
         System.out.println(configFile.exists());
 
-        if(configFile.exists()){
+        if (configFile.exists()) {
             // create home scene and load
             UserSettings settings = UserSettings.getInstance();
             settings.importSettings();
-        }
-        else{
+        } else {
             NewUserController controller = new NewUserController(this);
             NewUserView newUser = new NewUserView(controller);
             stage.setScene(newUser.scene);
@@ -39,23 +43,22 @@ public class SceneManager {
         //
         // // Bind scale to StackPane size
         // scaleTransform.xProperty().bind(Bindings.createDoubleBinding(() ->
-        //         root.getWidth() / 400, root.widthProperty()));
+        // root.getWidth() / 400, root.widthProperty()));
         // scaleTransform.yProperty().bind(Bindings.createDoubleBinding(() ->
-        //         root.getHeight() / 300, root.heightProperty()));
+        // root.getHeight() / 300, root.heightProperty()));
         //
         // Scene scene = new Scene(root, 800, 600);
 
-
         stage.setTitle("PageKeeper");
-        stage.sizeToScene(); 
+        stage.sizeToScene();
         stage.centerOnScreen();
         stage.show();
     }
 
-    public void setHomeView(){
+    public void setHomeView() {
         // Create next controller and view
         HomeController mainController = new HomeController(this);
         HomeView mainView = new HomeView(mainController);
-        stage.setScene(mainView.scene);
+        this.stage.setScene(mainView.scene);
     }
 }
