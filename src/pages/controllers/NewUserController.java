@@ -2,19 +2,18 @@ package pages.controllers;
 
 import model.UserSettings;
 import pages.SceneManager;
-import pages.controllers.HomeController;
 import pages.views.HomeView;
 
 public class NewUserController {
     SceneManager manager;
 
-    public NewUserController(SceneManager manager){
+    public NewUserController(SceneManager manager) {
         this.manager = manager;
     }
 
     public void onNameEntered(String name) {
-        
-        if(name.strip() == ""){
+
+        if (name.strip() == "") {
             return;
         }
 
@@ -25,7 +24,7 @@ public class NewUserController {
         UserSettings settings = UserSettings.getInstance();
         settings.setName(name);
         settings.saveSettings();
-        
+
         manager.setHomeView();
     }
 }

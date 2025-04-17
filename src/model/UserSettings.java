@@ -25,16 +25,15 @@ public class UserSettings {
     }
 
     private Color generateShade(Color color, double factor) {
-        return color.deriveColor(0, 1, factor, 1);
+        return color.interpolate(Color.WHITE, factor); // Lighter shades
     }
 
     private void generateColours(int numShades) {
         for (int i = 0; i < numShades; i++) {
-            primaryColourPalette[i] = generateShade(primaryColour, 1 - (i * 0.2)); // Lighter shades of the primary
-                                                                                   // color
-            bgColourPalette[i] = generateShade(bgColour, 1 - (i * 0.2)); // Lighter shades of the background color
-
-            double blendFactor = i * 0.2; // Blend from background to primary
+            double shadeFactor = i * 0.15; // 0.0, 0.15, 0.30, 0.45, 0.60 for subtler transitions
+            primaryColourPalette[i] = generateShade(primaryColour, shadeFactor);
+            bgColourPalette[i] = generateShade(bgColour, shadeFactor);
+            double blendFactor = i * 0.2;
             tonalColourPalette[i] = bgColour.interpolate(primaryColour, blendFactor);
         }
     }

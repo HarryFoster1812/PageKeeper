@@ -1,6 +1,8 @@
 package pages;
 
 import javafx.scene.Scene;
+import javafx.scene.layout.*;
+import javafx.scene.paint.*;
 import javafx.stage.Stage;
 import pages.views.*;
 import pages.controllers.*;
@@ -10,8 +12,6 @@ import model.UserSettings;
 public class SceneManager {
     private Stage stage;
     private Scene scene;
-
-    private NavBarView navbar;
 
     public SceneManager(Stage stage) {
 
@@ -24,6 +24,8 @@ public class SceneManager {
             // create home scene and load
             UserSettings settings = UserSettings.getInstance();
             settings.importSettings();
+            setHomeView();
+
         } else {
             NewUserController controller = new NewUserController(this);
             NewUserView newUser = new NewUserView(controller);
@@ -55,10 +57,43 @@ public class SceneManager {
         stage.show();
     }
 
+    private void createRootScene() {
+        // content
+        HBox root = new HBox();
+        root.setBackground(new Background(
+                new BackgroundFill(Color.web("#121212"), null, null)));
+
+        NavbarController navcontroller = new NavbarController(this);
+        NavbarView navbar = new NavbarView(navcontroller);
+        root.getChildren().add(navbar);
+
+        this.scene = new Scene(root, 1920, 1080);
+        this.stage.setScene(this.scene);
+    }
+
     public void setHomeView() {
         // Create next controller and view
+        if (this.scene == null) {
+            createRootScene();
+        }
         HomeController mainController = new HomeController(this);
         HomeView mainView = new HomeView(mainController);
-        this.stage.setScene(mainView.scene);
+    }
+
+    private void removePageView() {
+        HBox parent = (HBox) this.scene.getRoot();
+        parent.getChildren().remove(1);
+    }
+
+    public void setViewByName(String viewName) {
+        switch (viewName) {
+            case "Home":
+                setHomeView();
+                break;
+            case "Settings":
+                break;
+            default:
+                break;
+        }
     }
 }

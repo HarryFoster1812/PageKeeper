@@ -63,7 +63,7 @@
       <feComposite in2="hardAlpha" operator="out"/>
       <feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.305882 0"/>
       <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_2_1486"/>
-      <feBlend in="SourceGraphic" in2="effect1_dropShadow_2_1486" result="shape"/>
+      <feBlend in="SourceGraphic" in2="effect2_dropShadow_2_1486" result="shape"/>
     </filter>
   </defs>
 </svg>
